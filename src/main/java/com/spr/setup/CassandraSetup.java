@@ -73,7 +73,7 @@ public class CassandraSetup {
     private static void setupDatabase() {
         final Cluster cluster = new Cluster.Builder().addContactPoints(InetAddress.getLoopbackAddress()).build();
         try (final Session session = cluster.connect()) {
-            session.execute("CREATE KEYSPACE blogs WITH REPLICATION = { 'class' : 'SimpleStrategy' };");
+            session.execute("CREATE KEYSPACE blogs WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 4 };");
             session.execute("CREATE TABLE blogs.blogpost (" +
                 "id uuid PRIMARY KEY," +
                 "title text," +
